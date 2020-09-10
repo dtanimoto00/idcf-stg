@@ -13,7 +13,7 @@ jobs:
           kubeconfig: SPORT_KUBECONFIG
       - kube-orb/create-or-update-resource:
           get-rollout-status: true
-          resource-file-path: project/case2/sample-deployment.yaml
+          resource-file-path: case2/sample-deployment.yaml
           resource-name: deployment/sample-deployment
           show-kubectl-command: true
 orbs:
