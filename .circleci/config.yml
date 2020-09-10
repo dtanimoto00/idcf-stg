@@ -4,7 +4,7 @@ executors:
     docker:
       - image: "cimg/base:stable"
 jobs:
-  checkout:
+  build:
     executor: my-executor
     steps:
       - checkout
