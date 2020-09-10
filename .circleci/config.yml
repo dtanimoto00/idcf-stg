@@ -25,5 +25,5 @@ workflows:
     jobs:
       - checkout
       - kubectl-setting:
-        requires:
-          - checkout
+          requires:
+            - checkout
