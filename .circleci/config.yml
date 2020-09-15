@@ -18,6 +18,6 @@ jobs:
           show-kubectl-command: true
       - run:
           command: |
-            kubectl apply -f project/case2/sample-lb-service.yaml
+            kubectl apply -f case2/sample-lb-service.yaml
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
