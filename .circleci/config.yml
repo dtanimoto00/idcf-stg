@@ -16,5 +16,8 @@ jobs:
           resource-file-path: case2/sample-deployment.yaml
           resource-name: deployment/sample-deployment
           show-kubectl-command: true
+      - run:
+          command: |
+            kubectl apply -f case/sample-lb-service.yaml
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
