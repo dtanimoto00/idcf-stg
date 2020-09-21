@@ -11,13 +11,13 @@ jobs:
       - kube-orb/install-kubectl
       - kube-orb/install-kubeconfig:
           kubeconfig: SPORT_KUBECONFIG
-      - kube-orb/create-or-update-resource:
-          get-rollout-status: true
-          resource-file-path: case2/sample-deployment.yaml
-          resource-name: deployment/sample-deployment
-          show-kubectl-command: true
       - run:
           command: |
-            kubectl apply -f case2/sample-lb-service.yaml
+            curl -L https://github.com/kubernetes/kompose/releases/download/v1.21.0/kompose-linux-amd64 -o kompose
+            chmod +x kompose
+            sudo mv ./kompose /usr/local/bin/kompose
+            cd case2
+            kompose convert -f docker-compose.yml
+            kompose up -f docker-compose.yml
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
