@@ -10,10 +10,10 @@ jobs:
       - checkout
       - kube-orb/install-kubectl
       - kube-orb/install-kubeconfig:
-          kubeconfig: GCP_KUBECONFIG
+          kubeconfig: SPORT_KUBECONFIG
       - run:
           command: |
-            cd case2/gcp
+            cd case2/wordpress
             kubectl apply -f mysql.yaml
             kubectl apply -f mysql-service.yaml
             CIP=$(kubectl get svc | grep mysql | awk '{print $3 }')
