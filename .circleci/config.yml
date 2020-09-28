@@ -14,7 +14,7 @@ jobs:
       - run:
           command: |
             cd case2
-            kubectl get svc | grep mysql | CIP=$(aws '{print $3}')
+            kubectl get svc | grep mysql | CIP=$(awk '{print $3}')
             echo $CIP
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
