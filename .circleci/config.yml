@@ -10,10 +10,10 @@ jobs:
       - checkout
       - kube-orb/install-kubectl
       - kube-orb/install-kubeconfig:
-          kubeconfig: SPORT_KUBECONFIG
+          kubeconfig: GCP_KUBECONFIG
       - run:
           command: |
-            cd case2/wordpress
+            cd case2/gcp
             kubectl apply -f mysql.yaml
             kubectl apply -f mysql-service.yaml
             CIP=$(kubectl get svc | grep mysql | awk '{print $3 }')
@@ -39,9 +39,9 @@ workflows:
   blue-green:
     jobs:
       - gcp-deploy
-      #- sport-delete:
-      #    requires:
-      #      - gcp-deploy
+      - sport-delete:
+          requires:
+            - gcp-deploy
 
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
