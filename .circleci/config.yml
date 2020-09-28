@@ -10,7 +10,7 @@ jobs:
       - checkout
       - kube-orb/install-kubectl
       - kube-orb/install-kubeconfig:
-          kubeconfig: SPORT_KUBECONFIG
+          kubeconfig: GCP_KUBECONFIG
       - run:
           command: |
             cd case2/wordpress
