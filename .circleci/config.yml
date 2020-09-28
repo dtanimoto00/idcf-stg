@@ -16,7 +16,7 @@ jobs:
             cd case2
             CIP=$(kubectl get svc | grep mysql | awk '{print $3 }')
             cd wordpress
-            sed -i -e "s/SVCCIP/$CIP" mysql-service.yaml
+            sed -i -e "s/SVCCIP/$CIP/g" mysql-service.yaml
             cat mysql-service.yaml
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
