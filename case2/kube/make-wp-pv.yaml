@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: wp-hostpath-pv
-  labels:
-    type: local
+  name: wp-pv
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "slow"
 spec:
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: /data/wordpress
-    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server: 218.223.86.176
+    path: /export/nfs/wordpress

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nodejs
+  name: nodejs
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: nodejs-app
+  externalIPs:
+    - 218.223.86.177

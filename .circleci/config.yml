@@ -13,11 +13,8 @@ jobs:
           kubeconfig: SPORT_KUBECONFIG
       - run:
           command: |
-            curl -L https://github.com/kubernetes/kompose/releases/download/v1.21.0/kompose-linux-amd64 -o kompose
-            chmod +x kompose
-            sudo mv ./kompose /usr/local/bin/kompose
             cd case2
-            kompose convert -f docker-compose.yaml
-            kompose up -f docker-compose.yaml
+            kubectl get svc | grep mysql | CIP=$(aws '{print $3}')
+            echo $CIP
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
