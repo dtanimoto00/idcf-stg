@@ -4,23 +4,7 @@ executors:
     docker:
       - image: "cimg/base:stable"
 jobs:
-  gcp-deploy:
-    executor: my-executor
-    steps:
-      - checkout
-      - kube-orb/install-kubectl
-      - kube-orb/install-kubeconfig:
-          kubeconfig: GCP_KUBECONFIG
-      - run:
-          command: |
-            cd case2/gcp
-            kubectl apply -f mysql.yaml
-            kubectl apply -f mysql-service.yaml
-            CIP=$(kubectl get svc | grep mysql | awk '{print $3 }')
-            sed -i -e "s/SVCCIP/$CIP/g" wordpress.yaml
-            kubectl apply -f wordpress.yaml
-            kubectl apply -f wordpress-service.yaml
-  sport-delete:
+  build:
     executor: my-executor
     steps:
       - checkout
@@ -30,16 +14,12 @@ jobs:
       - run:
           command: |
             cd case2/wordpress
-            kubectl delete deployment mysql wordpress
-            kubectl delete svc mysql wordpress
-
-workflows:
-  version: 2
-  blue-green:
-    jobs:
-      - gcp-deploy
-      - sport-delete:
-          requires: -gcp-deploy
+            kubectl apply -f mysql.yaml
+            kubectl apply -f mysql-service.yaml
+            CIP=$(kubectl get svc | grep mysql | awk '{print $3 }')
+            sed -i -e "s/SVCCIP/$CIP/g" wordpress.yaml
+            kubectl apply -f wordpress.yaml
+            kubectl apply -f wordpress-service.yaml
 
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
