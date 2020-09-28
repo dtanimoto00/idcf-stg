@@ -39,9 +39,9 @@ workflows:
   blue-green:
     jobs:
       - gcp-deploy
-      - sport-delete:
-          requires:
-            - gcp-deploy
+      #- sport-delete:
+      #    requires:
+      #      - gcp-deploy
 
 orbs:
   kube-orb: circleci/kubernetes@0.11.1
