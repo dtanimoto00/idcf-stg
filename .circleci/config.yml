@@ -20,6 +20,7 @@ jobs:
             sed -i -e "s/SVCCIP/$CIP/g" wordpress.yaml
             kubectl apply -f wordpress.yaml
             kubectl apply -f wordpress-service.yaml
+            kubectl get all
 
   sport-delete:
     executor: my-executor
